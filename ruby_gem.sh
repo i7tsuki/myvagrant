@@ -2,30 +2,34 @@
 
 yum update
 
-#¥Rails—pƒ‰ƒCƒuƒ‰ƒŠƒCƒ“ƒXƒg[ƒ‹
+#â–¼Railsç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 yum install -y zlib-devel
 yum install -y openssl-devel
 
-#¥RubyƒCƒ“ƒXƒg[ƒ‹
+#â–¼Rubyã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 pushd /tmp
-curl -k -o ruby-2.1.2.tar.gz https://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz
-tar zxvf ruby-2.1.2.tar.gz
-pushd ruby-2.1.2
+curl -k -o ruby-2.1.5.tar.gz https://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz
+tar zxvf ruby-2.1.5.tar.gz
+pushd ruby-2.1.5
 ./configure
 make && make install
 popd	
 popd
 
-#¥RailsƒCƒ“ƒXƒg[ƒ‹
-gem install rails
+#â–¼Railsã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+#/usr/local/bin/gem source list
+/usr/local/bin/gem source --remove https://rubygems.org/
+/usr/local/bin/gem source --add https://tokyo-m.rubygems.org/
+#sudo chown -R vagrant:vagrant  /usr/local/lib/ruby/gems/2.1.0/
+/usr/local/bin/gem install rails
 
-#¥PostgreSQLƒCƒ“ƒXƒg[ƒ‹
+#â–¼PostgreSQLã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 pushd /tmp
-curl -k -o pgdg-centos94-9.4-1.noarch.rpm http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
-rpm -ivh pgdg-centos94-9.4-1.noarch.rpm
+curl -k -o pgdg-centos93-9.3-1.noarch.rpm http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+rpm -ivh pgdg-centos93-9.3-1.noarch.rpm
 #yum grouplist | grep PostgreSQL
-yum groupinstall "PostgreSQL Database Server 9.4 PGDG"
-/etc/init.d/postgresql-9.4 initdb
-chkconfig postgresql-9.4 on
+yum groupinstall -y "PostgreSQL Database Server 9.3 PGDG"
+/etc/init.d/postgresql-9.3 initdb
+chkconfig postgresql-9.3 on
 popd
 
