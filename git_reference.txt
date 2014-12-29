@@ -1,0 +1,12 @@
+#【Git】
+#現在の設定を確認
+#git config --list
+
+#【GitHub】
+#▼初期設定：ローカルにリポジトリコピー
+#git clone https://github.com/i7tsuki/myvagrant.git
+#▼コミットの流れ
+#git add .
+#git commit -m 'コメント'
+#git push origin master
+
