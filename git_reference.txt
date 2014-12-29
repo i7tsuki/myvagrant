@@ -3,8 +3,11 @@
 #git config --list
 
 #【GitHub】
-#▼初期設定：ローカルにリポジトリコピー
+#▼初期設定（既存のリポジトリ、かつユーザ設定済）
 #git clone https://github.com/i7tsuki/myvagrant.git
+#▼初期設定（既存のリポジトリ、かつユーザ設定未）
+#git config --global user.name "ユーザ名"
+#git config --global user.email メールアドレス
 #▼コミットの流れ
 #git add .
 #git commit -m 'コメント'
