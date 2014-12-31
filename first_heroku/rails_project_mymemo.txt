@@ -1,0 +1,14 @@
+#【Rails】
+#プロジェクト立ち上げる
+rails new mymemo -d postgresql 
+
+#【Gemfile】
+#therubyracerのコメントアウトを外す
+cp -p Gemfile /tmp/Gemfile_`date '+%Y%m%d%H%M%S'`
+sed Gemfile \
+"s/# gem 'therubyracer', platforms: :ruby/gem 'therubyracer', platforms: :ruby/" \
+> /tmp/Gemfile_new
+cp -f /tmp/Gemfile_new Gemfile
+#rm -f /tmp/Gemfile_new
+
+
