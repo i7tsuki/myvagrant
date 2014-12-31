@@ -1,5 +1,5 @@
 #【Git】
-#現在の設定を確認
+#▼現在の設定を確認
 #git config --list
 
 #【GitHub】
@@ -12,4 +12,28 @@
 #git add .
 #git commit -m 'コメント'
 #git push origin master
+#▼他PCの作業内容を取込込
+#git pull
+
+#【Vagrant】
+#▼初期化：Vagrantfile作成
+#vagrant init
+#▼使用可能なBox確認
+#vagrant box list
+#▼初期化：Boxの設定（www.vagrantbox.es）
+#１．Vagrantfileをテキストエディタで開く
+#２．config.vm.boxの値を使用したいBox名に変更する。
+#（例）config.vm.box = "centos65-x86_64"
+#▼起動
+#vagrant up
+#vagrant ssh
+#▼マシン状態変更
+#保留
+#vagrant suspend
+#再開
+#vagrant up
+#中断（シャットダウン）
+#vagrant halt
+#破壊
+#vagrant destroy
 
