@@ -1,14 +1,82 @@
 #【Rails】
-#プロジェクト立ち上げる
+#▼プロジェクト立ち上げる
 rails new mymemo -d postgresql 
 
 #【Gemfile】
-#therubyracerのコメントアウトを外す
+#▼therubyracerのコメントアウトを外す
 cp -p Gemfile /tmp/Gemfile_`date '+%Y%m%d%H%M%S'`
-sed Gemfile \
+sed \
 "s/# gem 'therubyracer', platforms: :ruby/gem 'therubyracer', platforms: :ruby/" \
-> /tmp/Gemfile_new
+Gemfile > /tmp/Gemfile_new
+echo "gem 'rb-readline'" >> /tmp/Gemfile_new
 cp -f /tmp/Gemfile_new Gemfile
 #rm -f /tmp/Gemfile_new
+
+#【Rails】
+bundle update && bundle install
+#rails server
+
+#【w3m】
+#yum install w3m
+
+#【Rails】
+rails generate scaffold Memo title:string body:text
+
+#ブラウザで確認
+#→http://○○○:3000/memos/new
+
+#【PostgreSQL】
+#▼"rake db:migrate"を有効にするための処理
+#VagrantでPostgreSQLアクセス出来るようにする＝vagrantユーザ作成
+sudo passwd postgres
+
+#ユーザ一覧
+#psql
+#SELECT * FROM pg_shadow;
+
+#DB作成可能、postgresユーザと同等の権限を持つvagrantユーザ作成
+sudo -u postgres createuser -d -U postgres -P vagrant
+#vagrantユーザで接続するDB作成
+createdb mymemo_development
+
+#【Rails】
+rake db:migrate
+
+#【Git】
+git config --global user.name 'i7tsuki'
+git config --global user.email 'i7tsuki.yu@gmail.com'
+git init
+git add
+git commit -m 'initiallize rails_project, mymemo'
+
+
+#【Gemfile】
+#▼Heroku公開用
+vi Gemfile
+#以下のgemを追記
+#gem 'rails_12factor', group: :production
+bundle update && bundle install
+#【Procfile】
+#▼Heroku公開用
+vi Procfile
+#以下追加
+#web: bundle exec rails server -p $PORT
+
+#【Heroku】
+git add . 
+git commit -m 'Heroku: Gemfile updated, Procfile added'
+heroku create
+git push heroku master
+heroku addons:add heroku-postgresql
+heroku run rake db:migrate
+#heroku apps:info
+#ブラウザ→ https://cryptic-shore-6589.herokuapp.com/memos
+
+#おそらく２回目以降やるコマンド
+git add.
+git commit -t '○○○'
+git push heroku master
+heroku run rake db:migrate 
+
 
 
