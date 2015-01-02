@@ -66,17 +66,68 @@ vi Procfile
 git add . 
 git commit -m 'Heroku: Gemfile updated, Procfile added'
 heroku create
+#↓スラグ作成→Dynoに反映
 git push heroku master
 heroku addons:add heroku-postgresql
 heroku run rake db:migrate
 #heroku apps:info
 #ブラウザ→ https://cryptic-shore-6589.herokuapp.com/memos
 
-#おそらく２回目以降やるコマンド
+#【Heroku】
+#▼おそらく２回目以降やるコマンド
 git add.
 git commit -m '○○○'
 git push heroku master
 heroku run rake db:migrate 
 
+#【Heroku】
+#▼便利なコマンド
+heroku ps
+#↓課金要
+#heroku ps:scale web=2
+heroku logs
+#heroku logs --tail
+#▼メンテナンスモード：ブラウザで確認
+heroku maintenance:on
+heroku maintenance
+heroku maintenance:off
+
+#One-off Dyno
+#▼アプリケーション内部で操作
+heroku run bash
+exit
+heroku run rails console
+	m = Memo.new({title:"hoge",body:"hogehoge"})
+	m.save
+	=> ブラウザで確認
+#▼ロールバック
+heroku releases
+#以下のコマンドで、引数に"v7"と指定すると、v7にrollbackする。
+heroku releases:rollback
+	#もう一度rollbackすると、上記コマンド実行前に戻る
+	heroku releases:rollback
+	
+#▼環境変数（Herokuサーバ）
+heroku config:set mykey=myvalue
+heroku config:get mykey
+heroku config
+heroku config:unset mykey
+	#↓○使用方法
+	app/views/memos/index.html.erbなどに以下のコードを埋め込む.
+		<%= ENV['mykey'] %>
+#▼環境変数（ローカル）
+#上記の「環境変数（Herokuサーバ）」を設定をローカルでも有効化する場合。
+vi .env
+	#【新規作成】
+	（例）下記コード記述。
+	mykey=mylocalvalue
+	
+#↓Procfileを基にrails sを行う。※foremanはheroku toolbarによってインストールされる。
+foreman start
+	#ブラウザでアクセス→http://localhost:5000/memos
+#↓本番環境では使用しないため、gitignoreに記載する。
+vi .gitignore
+	#【追記】
+	.env
 
 
