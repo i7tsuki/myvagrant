@@ -13,11 +13,11 @@ VAGRANT_LOG=${VAGRANT_HOME}"/log"
 export VAGRANT_LOG=${VAGRANT_HOME}"/log"
 mkdir ${VAGRANT_LOG}
 #▼スクリプト個別設定
-LOG_NAME="rails_install.log"
-export LOG_NAME="rails_install.log"
+LOG_NAME=`basename $0 ".sh"`".log"
+export LOG_NAME=`basename $0 ".sh"`".log"
 if [ -e ${VAGRANT_LOG}"/"${LOG_NAME} ]
 then
-        echo "既に`basename ${LOG_NAME} ".log"`を実行済です。もう一度実行しますか。"
+        echo "既に${LOG_NAME}を実行済です。もう一度実行しますか。"
         echo -n "実行する／実行しない：[y/n]"
         
         while true
@@ -41,7 +41,8 @@ yum update
 #【Rails】
 #▼必要なライブラリインストール
 yum install -y zlib-devel
-yum install -y openssl-develsudo yum -y install postgresql-devel
+yum install -y openssl-develsudo 
+yum install -y postgresql-devel
 
 #【Ruby】
 #▼インストール
