@@ -37,3 +37,5 @@
 #破壊
 #vagrant destroy
 
+#【Rails】
+rails db

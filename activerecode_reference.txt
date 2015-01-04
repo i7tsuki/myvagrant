@@ -1,0 +1,7 @@
+#【ActiveRecode】
+#▼rbファイルに以下記述すると、ActiveRecodeによって、発行されたSQLを確認できる。
+require 'logger'
+
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+
